@@ -3,6 +3,7 @@ import { renderer } from './renderer'
 
 import { Counter } from './components/Counter'
 import { SuspenseDemo } from './components/SuspenseDemo'
+import { ServerCounter } from './components/ServerCounter'
 
 const app = new Hono()
 
@@ -14,6 +15,7 @@ app.get('/', (c) => {
     <>
       <Counter />
       <SuspenseDemo />
+      <ServerCounter />
     </>
   )
 })

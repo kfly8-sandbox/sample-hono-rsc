@@ -7,6 +7,7 @@ export interface Props {}
 
 type RendererOptions = {
   nonce?: string
+  unsafeEval?: boolean
 }
 
 type BaseProps = {
@@ -30,6 +31,18 @@ const createRenderer =
 
     const req = c.req.raw;
     const res = await RSC.renderRequest(req, node, options);
+
+    const { nonce, unsafeEval } = options || {};
+
+    if (nonce) {
+      res.headers.set(
+        "content-security-policy",
+        `default-src 'self'; ` +
+          // `unsafe-eval` is required during dev since React uses eval for findSourceMapURL feature
+          `script-src 'self' 'nonce-${nonce}' ${unsafeEval ? `'unsafe-eval'` : ``} ; ` +
+          `style-src 'self' 'nonce-${nonce}'; `,
+      );
+    }
 
     return res;
   }
