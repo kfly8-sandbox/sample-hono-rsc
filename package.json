@@ -1,0 +1,28 @@
+{
+  "name": "sample-hono-rsc",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vite build --ssr",
+    "preview": "$npm_execpath run build && wrangler dev dist-server/index.js",
+    "deploy": "$npm_execpath run build && wrangler deploy dist-server/index.js",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings"
+  },
+  "dependencies": {
+    "@hono/react-renderer": "^1.0.1",
+    "hono": "^4.7.10",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^0.1.15",
+    "@hiogawa/vite-rsc": "^0.2.3",
+    "@hono/vite-build": "^1.5.0",
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
+    "@vitejs/plugin-react": "^4.4.1",
+    "vite": "^6.1.1",
+    "vite-plugin-ssr-hot-reload": "^0.4.1",
+    "wrangler": "^4.4.0"
+  }
+}
