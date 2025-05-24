@@ -18,4 +18,4 @@ app.get('/', (c) => {
   )
 })
 
-export default import.meta.env.DEV ? app.fetch : app;
+export default app.fetch

@@ -19,8 +19,7 @@ export const renderer = rscRenderer(
     )
   },
   {
-    nonce: !import.meta.env.NO_CSP ? crypto.randomUUID() : undefined,
     // `unsafe-eval` is required during dev since React uses eval for findSourceMapURL feature
-    unsafeEval: import.meta.env.NODE_ENV !== 'production',
+    unsafeEval: import.meta.env.DEV,
   }
 )

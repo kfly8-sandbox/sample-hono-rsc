@@ -12,7 +12,7 @@ declare module 'hono' {
 }
 
 type RendererOptions = {
-  nonce?: string
+  disableNonce?: boolean
   unsafeEval?: boolean
 }
 
@@ -36,9 +36,16 @@ const createRenderer =
     const node = component ? await component({ children, Layout, c, ...props }) : children
 
     const req = c.req.raw;
-    const res = await RSC.renderRequest(req, node, options);
 
-    const { nonce, unsafeEval } = options || {};
+    const { unsafeEval, disableNonce } = options || {};
+    const dynamicOptions = {
+      ...options,
+      nonce: disableNonce ? undefined : crypto.randomUUID()
+    };
+
+    const res = await RSC.renderRequest(req, node, dynamicOptions);
+
+    const { nonce } = dynamicOptions;
 
     if (nonce) {
       res.headers.set(
