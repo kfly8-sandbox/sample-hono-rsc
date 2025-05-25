@@ -7,7 +7,7 @@ export function Counter() {
 
   return (
     <>
-      <button onClick={() => setCount(count + 1)}>
+      <button onClick={() => setCount(count + 1)} className="font-bold py-2 px-4 rounded bg-black text-white">
         Click me
       </button>
       count: {count}

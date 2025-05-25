@@ -8,11 +8,7 @@ export const renderer = rscRenderer(
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>Hono RSC Demo</title>
-          <link
-            href={import.meta.env.PROD ? `/assets/style.css` : `/src/style.css`}
-            rel="stylesheet"
-          />
-          <script type="module" src={import.meta.env.PROD ? `/assets/client.js` : `/src/client.tsx`} />
+          <link href="/src/style.css" rel="stylesheet" />
         </head>
         <body id="app">{children}</body>
       </html>

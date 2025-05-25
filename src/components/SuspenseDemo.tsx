@@ -8,7 +8,7 @@ export function SuspenseDemo() {
   const messagePromise = fetchHello();
 
   return (
-    <Suspense fallback={<p>Loading ...</p>}>
+    <Suspense fallback={<Loading />}>
       <MessageBox messagePromise={messagePromise} />
     </Suspense>
   )
@@ -23,3 +23,6 @@ function MessageBox({ messagePromise }: MessageBoxProps) {
   return <p>Message: {message}</p>;
 }
 
+function Loading() {
+  return <p>Message: <span className="animate-pulse">Loading ...</span></p>;
+}

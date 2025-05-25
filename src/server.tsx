@@ -12,6 +12,7 @@ app.get('/', (c) => {
 
   return c.render(
     <>
+      <h1 className="text-3xl font-bold underline">Hono RSC Demo</h1>
       <Counter />
       <SuspenseDemo />
     </>

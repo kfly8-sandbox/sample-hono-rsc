@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import type { Plugin } from 'vite'
 import react from "@vitejs/plugin-react"
 import rsc from "@hiogawa/vite-rsc/plugin";
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [
@@ -14,6 +15,7 @@ export default defineConfig({
       }
     }),
     createCloudflarePlugin(),
+    tailwindcss(),
   ],
   build: {
     minify: true,
