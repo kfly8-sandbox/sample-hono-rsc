@@ -1,21 +1,3 @@
-```txt
-npm install
-npm run dev
-```
+## What's this?
 
-```txt
-npm run deploy
-```
-
-[For generating/synchronizing types based on your Worker configuration run](https://developers.cloudflare.com/workers/wrangler/commands/#types):
-
-```txt
-npm run cf-typegen
-```
-
-Pass the `CloudflareBindings` as generics when instantiation `Hono`:
-
-```ts
-// src/index.ts
-const app = new Hono<{ Bindings: CloudflareBindings }>()
-```
+This repository is a sample project implementing [RSC](https://react.dev/reference/rsc/server-components) with Hono and Vite.
