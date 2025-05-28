@@ -1,20 +1,29 @@
 import { Suspense } from 'react';
-import { fetchHello } from '../api/hello';
+
+async function fetchHello() {
+  const response = await fetch( import.meta.env.DEV ? "http://localhost:5173/api/hello" : "http://localhost:4173/api/hello", {
+    cache: 'no-store' // 毎回新しいデータを取得
+  });
+
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+
+  const data = await response.json();
+  return data as { message: string };
+}
 
 export function SuspenseDemo() {
-
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<p>Loading...</p>}>
       <MessageBox />
     </Suspense>
   )
 }
 
 async function MessageBox() {
-  const message = await fetchHello();
-  return <p>Message: {message}</p>;
+  const message = await fetchHello().then(data => data.message);
+
+  return <p>Message: {message}</p>
 }
 
-function Loading() {
-  return <p>Message: <span className="animate-pulse">Loading ...</span></p>;
-}

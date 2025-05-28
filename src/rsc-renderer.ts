@@ -57,6 +57,9 @@ const createRenderer =
       );
     }
 
+    res.headers.set("Transfer-Encoding", "chunked");
+    res.headers.set('Vary', 'Accept-Encoding')
+
     return res;
   }
 
