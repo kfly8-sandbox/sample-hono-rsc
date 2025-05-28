@@ -1,25 +1,17 @@
-"use client"
-
-import { use } from 'react'
 import { Suspense } from 'react';
 import { fetchHello } from '../api/hello';
 
 export function SuspenseDemo() {
-  const messagePromise = fetchHello();
 
   return (
     <Suspense fallback={<Loading />}>
-      <MessageBox messagePromise={messagePromise} />
+      <MessageBox />
     </Suspense>
   )
 }
 
-type MessageBoxProps = {
-  messagePromise: Promise<string>
-}
-
-function MessageBox({ messagePromise }: MessageBoxProps) {
-  const message = use(messagePromise);
+async function MessageBox() {
+  const message = await fetchHello();
   return <p>Message: {message}</p>;
 }
 
