@@ -20,18 +20,6 @@ export default defineConfig({
   build: {
     minify: true,
   },
-  environments: {
-    client: {
-      build: {
-        assetsDir: 'assets',
-        rollupOptions: {
-          output: {
-            assetFileNames: "assets/[name].[ext]",
-          }
-        },
-      }
-    }
-  }
 })
 
 function createCloudflarePlugin(): Plugin {
