@@ -8,6 +8,12 @@
   "workers_dev": true,
   "compatibility_date": "2025-04-01",
   "compatibility_flags": ["nodejs_als"],
+  "services": [
+    {
+      "binding": "SELF",
+      "service": "sample-hono-rsc"
+    }
+  ],
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1

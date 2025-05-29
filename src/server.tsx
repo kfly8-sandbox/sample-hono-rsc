@@ -8,7 +8,11 @@ import { Counter } from './components/Counter'
 import { SuspenseDemo } from './components/SuspenseDemo'
 import { ServerCounter } from './components/ServerCounter'
 
-const app = new Hono()
+type Env = {
+  SELF: Fetcher;
+}
+
+const app = new Hono<{ Bindings: Env }>()
 
 app.use(renderer)
 import.meta.env.DEV && ( app.use(logger()) )
@@ -23,8 +27,7 @@ app.get('/', (c) => {
 
 const api = app.get('/api/hello', async (c) => {
   await new Promise(resolve => setTimeout(resolve, 1000));
-
-  return c.json({ message: 'HELLO' })
+  return c.json({ message: "HELLO" })
 })
 
 app.on(['GET', 'POST'], '/server-counter', async (c) => {
