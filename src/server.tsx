@@ -11,7 +11,7 @@ import { ServerCounter } from './components/ServerCounter'
 const app = new Hono()
 
 app.use(renderer)
-app.use(logger())
+import.meta.env.DEV && ( app.use(logger()) )
 //app.use(compress())
 app.use(contextStorage())
 

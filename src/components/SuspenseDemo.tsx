@@ -18,9 +18,11 @@ async function MessageBox() {
   const client = hc<ApiType>(origin);
   const res = await client.api.hello.$get()
 
-  console.log(res)
-
   if (!res.ok) {
+    console.error({
+      status: res.status,
+      headers: res.headers.toString(),
+    })
     throw new Error("Failed to fetch hello message");
   }
 
