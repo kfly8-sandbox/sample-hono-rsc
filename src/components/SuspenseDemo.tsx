@@ -1,17 +1,7 @@
+import { hc } from 'hono/client'
+import type { ApiType } from '../server'
+import { getContext } from 'hono/context-storage'
 import { Suspense } from 'react';
-
-async function fetchHello() {
-  const response = await fetch( import.meta.env.DEV ? "http://localhost:5173/api/hello" : "http://localhost:4173/api/hello", {
-    cache: 'no-store' // 毎回新しいデータを取得
-  });
-
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
-  }
-
-  const data = await response.json();
-  return data as { message: string };
-}
 
 export function SuspenseDemo() {
   return (
@@ -22,8 +12,18 @@ export function SuspenseDemo() {
 }
 
 async function MessageBox() {
-  const message = await fetchHello().then(data => data.message);
+  const c = getContext()
+  const origin = new URL(c.req.url).origin;
 
-  return <p>Message: {message}</p>
+  const client = hc<ApiType>(origin);
+  const res = await client.api.hello.$get()
+  if (!res.ok) {
+    throw new Error("Failed to fetch hello message");
+  }
+
+  const data = await res.json();
+  const message = data.message
+
+  return <p>Message: {message}</p>;
 }
 
